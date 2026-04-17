@@ -1,0 +1,27 @@
+services:
+  codexflight-bot:
+    build: .
+    container_name: codexflight-bot
+    restart: unless-stopped
+    environment:
+      TELEGRAM_BOT_TOKEN_FILE: /run/secrets/telegram_token
+      AUTHORIZED_USER_ID: ${AUTHORIZED_USER_ID}
+      CODEX_WS_URL: ws://codex-app-server:8295
+      CODEX_SANDBOX: danger-full-access
+      CODEX_APPROVAL_POLICY: never
+      LOG_LEVEL: INFO
+      TZ: America/Santiago
+      DATA_DIR: /data
+    volumes:
+      - ./data:/data
+    secrets:
+      - telegram_token
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os; exit(0 if os.path.exists('/data/healthz') else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+secrets:
+  telegram_token:
+    file: ./secrets/telegram_token.txt
