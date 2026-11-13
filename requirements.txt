@@ -1,5 +1,5 @@
 # Bot framework
-aiogram>=3.13.0
+aiogram>=3.22.0
 
 # WebSocket client
 websockets>=13.0
