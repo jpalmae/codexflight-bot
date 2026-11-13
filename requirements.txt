@@ -12,7 +12,7 @@ tenacity>=9.0.0
 
 # Database
 sqlalchemy[asyncio]>=2.0.35
-aiosqlite>=0.20.0
+aiosqlite>=0.22.1
 alembic>=1.13.0
 
 # Settings
